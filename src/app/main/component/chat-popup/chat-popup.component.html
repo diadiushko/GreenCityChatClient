@@ -1,0 +1,21 @@
+<div class="chat-popup" [class.opened]="isOpen">
+    <div class="popup-top-panel">
+        <div class="panel-account" (click)="isOpen = !isOpen">
+            <img [src]="CHAT_ICONS.userLogo" alt="user logo">
+            <span class="panel-account-title">Messages</span>
+        </div>
+
+        <div class="panel-buttons">
+            <button class="panel-button">
+                <img [src]="CHAT_ICONS.threeDots" alt="options">
+            </button>
+            <button class="panel-button">
+                <img [src]="CHAT_ICONS.newMessage" alt="new message">
+            </button>
+            <button class="panel-button">
+                <img [src]="CHAT_ICONS.chat" alt="open chat">
+            </button>
+        </div>
+    </div>
+    <app-chats-list></app-chats-list>
+</div>
