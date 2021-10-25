@@ -8,13 +8,17 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CHAT_ICONS} from './main/chat-icons';
 import { ChatsSearchPipe } from './main/pipe/chats-search/chats-search.pipe';
+import { NewMessageWindowComponent } from './main/component/new-message-window/new-message-window.component';
+import { ReferenceDirective } from './main/directive/reference/reference.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         ChatPopupComponent,
         ChatsListComponent,
-        ChatsSearchPipe
+        ChatsSearchPipe,
+        NewMessageWindowComponent,
+        ReferenceDirective
     ],
     imports: [
         BrowserModule,

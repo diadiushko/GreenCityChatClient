@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ChatsService} from '../../service/chats/chats.service';
 import {CHAT_ICONS} from '../../chat-icons';
 import {FormControl} from '@angular/forms';
 import {debounceTime} from 'rxjs/operators';
+import {Chat} from '../../model/Chat.model';
 
 @Component({
     selector: 'app-chats-list',
@@ -10,15 +11,17 @@ import {debounceTime} from 'rxjs/operators';
     styleUrls: ['./chats-list.component.scss']
 })
 export class ChatsListComponent implements OnInit {
-    public CHAT_ICONS = CHAT_ICONS;
+    public chatIcons = CHAT_ICONS;
     public searchField = '';
     public searchFieldControl = new FormControl();
+    @Output() createNewMessageWindow: EventEmitter<Chat> = new EventEmitter<Chat>();
 
     constructor(
         public chatService: ChatsService
     ) { }
 
     ngOnInit(): void {
+        // TODO: unsub on destroy;
         this.searchFieldControl.valueChanges
             .pipe(
                 debounceTime(500)
@@ -37,5 +40,10 @@ export class ChatsListComponent implements OnInit {
         const isToday = messageDate.getDate() === today.getDate() &&
             messageDate.getMonth() === today.getMonth();
         return isToday ? 'HH:MM' : 'dd/MM';
+    }
+
+    openNewMessageWindow(chat: Chat) {
+        this.chatService.setCurrentChat(chat);
+        this.createNewMessageWindow.emit(chat)
     }
 }

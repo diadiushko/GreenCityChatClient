@@ -1,7 +1,7 @@
 import {User} from './User.model';
 
 export interface Chat {
-    id: number;
+    id?: number;
     name: string;
     owner: User;
     lastMessage: string;

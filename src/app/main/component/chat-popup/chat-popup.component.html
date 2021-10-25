@@ -1,21 +1,23 @@
 <div class="chat-popup" [class.opened]="isOpen">
     <div class="popup-top-panel">
         <div class="panel-account" (click)="isOpen = !isOpen">
-            <img [src]="CHAT_ICONS.userLogo" alt="user logo">
+            <img [src]="chatIcons.userLogo" alt="user logo">
             <span class="panel-account-title">Messages</span>
         </div>
 
         <div class="panel-buttons">
             <button class="panel-button">
-                <img [src]="CHAT_ICONS.threeDots" alt="options">
+                <img [src]="chatIcons.threeDots" alt="options" title="Options">
+            </button>
+            <button class="panel-button" (click)="openNewMessageWindow(true)">
+                <img [src]="chatIcons.newMessage" alt="new message" title="New message">
             </button>
             <button class="panel-button">
-                <img [src]="CHAT_ICONS.newMessage" alt="new message">
-            </button>
-            <button class="panel-button">
-                <img [src]="CHAT_ICONS.chat" alt="open chat">
+                <img [src]="chatIcons.chat" alt="open chat" title="Open chat">
             </button>
         </div>
     </div>
-    <app-chats-list></app-chats-list>
+    <app-chats-list (createNewMessageWindow)="openNewMessageWindow(false)"></app-chats-list>
 </div>
+
+<div class="new-msg-container" *appReferenceDirective></div>

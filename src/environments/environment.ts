@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  backendChatLink: "http://localhost:8080"
+    production: false,
+    backendLink: 'http://localhost:8080',
 };

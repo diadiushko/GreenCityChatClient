@@ -1,16 +1,16 @@
 <div class="searching-panel">
-    <input type="text" placeholder="Search user..." [formControl]="searchFieldControl">
+    <input type="text" placeholder="Search chat..." [formControl]="searchFieldControl">
     <button class="search-filter-button">
-        <img [src]="CHAT_ICONS.settings" alt="settings">
+        <img [src]="chatIcons.settings" alt="settings">
     </button>
 </div>
 
 <div class="chats">
     <div class="chat"
          *ngFor="let chat of chatService.userChatsStream$ | async | chatsSearch: searchField"
-         (click)="chatService.setCurrentChat(chat)"
+         (click)="openNewMessageWindow(chat)"
     >
-        <img [src]="CHAT_ICONS.userLogo" alt="user logo">
+        <img [src]="chatIcons.userLogo" alt="user logo">
         <div class="chat-text">
             <span class="chat-name">{{chat.name}}</span>
             <div class="chat-last-message">

@@ -17,6 +17,7 @@
   transform: translateY(calc(100% - 45px));
   transition: transform 0.2s ease-out;
   max-height: 650px;
+  z-index: 1000;
 
   &.opened {
     transform: translateY(0);

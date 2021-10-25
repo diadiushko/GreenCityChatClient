@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export class ChatsService {
     public userChatsStream$: BehaviorSubject<Chat[]> = new BehaviorSubject<Chat[]>([]);
-    public currentChatsStream$: BehaviorSubject<Chat | null> = new BehaviorSubject<Chat | null>(null);
+    public currentChatsStream$: BehaviorSubject<Chat> = new BehaviorSubject<Chat>(null);
 
     constructor(private httpClient: HttpClient) { }
 
@@ -23,14 +23,14 @@ export class ChatsService {
 
     public getAllUserChats(userId: number): void {
         this.httpClient
-            .get<Chat[]>(`${ environment.backendChatLink }/chats/userId/${ userId }`)
+            .get<Chat[]>(`${ environment.backendLink }/chats/userId/${ userId }`)
             .subscribe((chats: Chat[]) => {
                 console.log(chats);
                 this.userChatsStream$.next(chats);
             });
     }
 
-    public setCurrentChat(chat: Chat) {
+    public setCurrentChat(chat: Chat | null) {
         console.log(chat);
         this.currentChatsStream$.next(chat);
     }
