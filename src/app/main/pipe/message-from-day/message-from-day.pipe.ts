@@ -2,7 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {Message} from '../../model/Message.model';
 
 @Pipe({
-    name: 'messageFromDay'
+    name: 'messageFromDay',
+    pure: false
 })
 
 export class MessageFromDayPipe implements PipeTransform {
@@ -21,7 +22,6 @@ export class MessageFromDayPipe implements PipeTransform {
             currentDay.push(message);
         }
         result.push([...currentDay]);
-        console.log(result);
         return result;
     }
 

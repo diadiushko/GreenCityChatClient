@@ -30,7 +30,9 @@ export class SocketService {
 
     private onConnected() {
         this.stompClient.subscribe('/message/chat-messages', (data: IMessage) => {
-            console.log(JSON.parse(data.body));
+            const currentMessages = this.chatsService.currentChatMessages;
+            currentMessages.push(JSON.parse(data.body));
+            this.chatsService.currentChatMessagesStream$.next(currentMessages);
         });
     }
 

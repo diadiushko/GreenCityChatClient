@@ -12,7 +12,7 @@ export class ChatsService {
     public userChatsStream$: BehaviorSubject<Chat[]> = new BehaviorSubject<Chat[]>([]);
     public currentChatsStream$: BehaviorSubject<Chat> = new BehaviorSubject<Chat>(null);
     public currentChatMessagesStream$: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
-    private chatsMessages = {};
+    public chatsMessages: Object = {};
     private messagesIsLoading = false;
 
     constructor(private httpClient: HttpClient) { }

@@ -103,3 +103,24 @@
   font-size: 12px;
   text-overflow: clip;
 }
+
+.sender {
+  @include flex(row, space-between, center);
+  padding: 10px;
+
+  img {
+    height: 20px;
+  }
+
+  button {
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: content-box;
+    @include flex(row, center, center);
+
+    &:hover {
+      background: #eceff0;
+    }
+  }
+}
