@@ -1,0 +1,48 @@
+@import "src/styles";
+
+:host {
+  height: 100%;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.current-chat {
+  @include flex(column, center, center);
+  height: 100%;
+}
+
+.current-chat-title {
+  @include flex(row, flex-start, center);
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  column-gap: 7px;
+}
+
+.current-chat-name {
+  font-size: 16px;
+}
+
+.current-chat-dot {
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background: #444e55;
+}
+
+.current-chat-participants-quantity {
+  font-size: 13px;
+}
+
+.current-chat-content {
+  width: 42vw;
+  @include flex(row, center, center);
+  flex: 1;
+}
+
+.green-planet-ph {
+  height: 250px;
+}
+
+.choose-chat-ph {
+  font-size: 16px;
+}

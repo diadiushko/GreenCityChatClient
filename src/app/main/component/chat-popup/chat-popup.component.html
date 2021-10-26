@@ -13,7 +13,7 @@
                 <img [src]="chatIcons.newMessage" alt="new message" title="New message">
             </button>
             <button class="panel-button">
-                <img [src]="chatIcons.chat" alt="open chat" title="Open chat">
+                <img [src]="chatIcons.chat" (click)="openChatModal()" alt="open chat" title="Open chat">
             </button>
         </div>
     </div>

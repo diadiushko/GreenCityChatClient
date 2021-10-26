@@ -7,6 +7,8 @@ import {CommonService} from '../../service/common/common.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {SocketService} from '../../service/socket/socket.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ChatModalComponent} from '../chat-modal/chat-modal.component';
 
 @Component({
     selector: 'app-chat-popup',
@@ -18,12 +20,20 @@ export class ChatPopupComponent implements OnInit, OnDestroy {
     private onDestroy$ = new Subject();
     public isOpen: boolean = true;
     @ViewChild(ReferenceDirective) elementRef: ReferenceDirective;
+    private dialogConfig = {
+        hasBackdrop: true,
+        closeOnNavigation: true,
+        disableClose: true,
+        panelClass: 'custom-dialog-container',
+        height: '80vh'
+    };
 
     constructor(
         private chatsService: ChatsService,
         private commonService: CommonService,
         private factory: ComponentFactoryResolver,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -47,6 +57,11 @@ export class ChatPopupComponent implements OnInit, OnDestroy {
 
     private closeNewMessageWindow() {
         this.elementRef.containerRef.clear();
+    }
+
+    public openChatModal() {
+        this.dialog.closeAll();
+        this.dialog.open(ChatModalComponent, this.dialogConfig);
     }
 
     ngOnDestroy(): void {

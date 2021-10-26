@@ -49,7 +49,9 @@ export class NewMessageWindowComponent implements OnInit, OnDestroy {
             messageText: this.messageControl.value,
             messageDate: new Date()
         }
+        console.log(message.messageDate);
         this.socketService.sendMessage(message);
+        this.close();
     }
 
     ngOnDestroy(): void {

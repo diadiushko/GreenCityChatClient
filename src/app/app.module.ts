@@ -10,6 +10,11 @@ import {CHAT_ICONS} from './main/chat-icons';
 import { ChatsSearchPipe } from './main/pipe/chats-search/chats-search.pipe';
 import { NewMessageWindowComponent } from './main/component/new-message-window/new-message-window.component';
 import { ReferenceDirective } from './main/directive/reference/reference.directive';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ChatModalComponent } from './main/component/chat-modal/chat-modal.component';
+import { CurrentChatComponent } from './main/component/current-chat/current-chat.component';
+import { ChatComponent } from './main/component/chat/chat.component';
 
 @NgModule({
     declarations: [
@@ -18,13 +23,18 @@ import { ReferenceDirective } from './main/directive/reference/reference.directi
         ChatsListComponent,
         ChatsSearchPipe,
         NewMessageWindowComponent,
-        ReferenceDirective
+        ReferenceDirective,
+        ChatModalComponent,
+        CurrentChatComponent,
+        ChatComponent
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+        MatDialogModule
     ],
     providers: [],
     bootstrap: [AppComponent]

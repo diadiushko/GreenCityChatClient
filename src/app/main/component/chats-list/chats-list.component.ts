@@ -39,7 +39,7 @@ export class ChatsListComponent implements OnInit {
         }
         const isToday = messageDate.getDate() === today.getDate() &&
             messageDate.getMonth() === today.getMonth();
-        return isToday ? 'HH:MM' : 'dd/MM';
+        return isToday ? 'HH:mm' : 'dd/MM';
     }
 
     openNewMessageWindow(chat: Chat) {

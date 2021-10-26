@@ -3,6 +3,7 @@ import * as SockJS from 'sockjs-client';
 import {environment} from '../../../../environments/environment';
 import {CompatClient, IMessage, Stomp} from '@stomp/stompjs';
 import {Message} from '../../model/Message.model';
+import {ChatsService} from '../chats/chats.service';
 
 
 @Injectable({
@@ -13,7 +14,9 @@ export class SocketService {
     private stompClient: CompatClient;
     private backendSocketLink = `${ environment.backendLink }/socket`;
 
-    constructor() {}
+    constructor(
+        private chatsService: ChatsService
+    ) {}
 
     public connect() {
         this.socket = new SockJS(this.backendSocketLink);
@@ -37,5 +40,9 @@ export class SocketService {
 
     sendMessage(message: Message) {
         this.stompClient.send('/app/addMessage', {}, JSON.stringify(message));
+        const currentChat = this.chatsService.currentChat;
+        currentChat.lastMessage = message.messageText;
+        currentChat.lastMessageDate = message.messageDate;
+        this.chatsService.updateChat(currentChat);
     }
 }
