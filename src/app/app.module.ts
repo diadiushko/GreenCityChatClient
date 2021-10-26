@@ -15,6 +15,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ChatModalComponent } from './main/component/chat-modal/chat-modal.component';
 import { CurrentChatComponent } from './main/component/current-chat/current-chat.component';
 import { ChatComponent } from './main/component/chat/chat.component';
+import { MessageFromDayPipe } from './main/pipe/message-from-day/message-from-day.pipe';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { ChatComponent } from './main/component/chat/chat.component';
         ReferenceDirective,
         ChatModalComponent,
         CurrentChatComponent,
-        ChatComponent
+        ChatComponent,
+        MessageFromDayPipe
     ],
     imports: [
         BrowserModule,

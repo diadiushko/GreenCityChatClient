@@ -1,3 +1,20 @@
-<div class="chat">
-
+<div class="chat" #chat>
+    <div class="messages-from-day"
+         *ngFor="let messagesFromDay of chatsService.currentChatMessagesStream$ | async | messageFromDay"
+    >
+        <div class="chat-days-separate-line">
+            <span>{{messagesFromDay[0].messageDate | date: 'dd.MM.yyyy'}}</span>
+        </div>
+        <!-- TODO: HARDCODE -->
+        <div class="message" *ngFor="let message of messagesFromDay" [class.own]="message.senderId === 3">
+            <img [src]="chatIcons.userLogo" alt="user logo">
+            <div class="msg-block">
+                <span>{{message.messageText}}</span>
+            </div>
+            <span class="msg-time">{{message.messageDate | date: 'hh:mm'}}</span>
+        </div>
+    </div>
+</div>
+<div class="sender">
+    <span>send</span>
 </div>

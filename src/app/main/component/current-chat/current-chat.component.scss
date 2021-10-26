@@ -37,6 +37,7 @@
   width: 42vw;
   @include flex(row, center, center);
   flex: 1;
+  overflow: hidden;
 }
 
 .green-planet-ph {
