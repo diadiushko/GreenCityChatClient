@@ -4,6 +4,7 @@ import {CHAT_ICONS} from '../../chat-icons';
 import {Message} from '../../model/Message.model';
 import {FormControl} from '@angular/forms';
 import {SocketService} from '../../service/socket/socket.service';
+import {UserEmulateService} from '../../service/user-emulate-service/user-emulate.service';
 
 @Component({
     selector: 'app-chat',
@@ -18,13 +19,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     constructor(
         public chatsService: ChatsService,
-        private socketService: SocketService
+        private socketService: SocketService,
+        public userService: UserEmulateService
     ) { }
 
     ngOnInit(): void {
-        this.chatsService.currentChatMessagesStream$.subscribe(() => {
-            this.shouldNotBeScrolled = false;
-        })
+        this.chatsService.currentChatMessagesStream$
+            .subscribe(() => {
+                this.shouldNotBeScrolled = false;
+            })
     }
 
     ngAfterViewChecked(): void {
@@ -40,11 +43,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         const message: Message = {
             chatId: this.chatsService.currentChat.id,
             // TODO: hardcode
-            senderId: 3,
+            senderId: this.userService.currentUserId,
             messageText: this.messageControl.value,
             messageDate: new Date()
         }
-
+        this.messageControl.reset();
         this.socketService.sendMessage(message);
     }
 }

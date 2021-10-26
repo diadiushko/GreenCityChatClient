@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 import {CommonService} from '../../service/common/common.service';
 import {SocketService} from '../../service/socket/socket.service';
 import {Message} from '../../model/Message.model';
+import {UserEmulateService} from '../../service/user-emulate-service/user-emulate.service';
 
 @Component({
     selector: 'app-new-message-window',
@@ -23,7 +24,8 @@ export class NewMessageWindowComponent implements OnInit, OnDestroy {
     constructor(
         public chatsService: ChatsService,
         private commonService: CommonService,
-        private socketService: SocketService
+        private socketService: SocketService,
+        private userService: UserEmulateService
     ) { }
 
     ngOnInit(): void {
@@ -45,7 +47,7 @@ export class NewMessageWindowComponent implements OnInit, OnDestroy {
         const message: Message = {
             chatId: this.chatsService.currentChat.id,
             // TODO hardcoded
-            senderId: 3,
+            senderId: this.userService.currentUserId,
             messageText: this.messageControl.value,
             messageDate: new Date()
         }

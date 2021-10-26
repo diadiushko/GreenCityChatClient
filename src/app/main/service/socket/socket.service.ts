@@ -30,6 +30,7 @@ export class SocketService {
 
     private onConnected() {
         this.stompClient.subscribe('/message/chat-messages', (data: IMessage) => {
+            // TODO bad logic, you might not be sitting in chat where message landed FIXIT
             const currentMessages = this.chatsService.currentChatMessages;
             currentMessages.push(JSON.parse(data.body));
             this.chatsService.currentChatMessagesStream$.next(currentMessages);
