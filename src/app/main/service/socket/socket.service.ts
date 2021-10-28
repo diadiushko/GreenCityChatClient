@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as SockJS from 'sockjs-client';
-import {environment} from '../../../../environments/environment';
-import {CompatClient, IMessage, Stomp} from '@stomp/stompjs';
-import {Message} from '../../model/Message.model';
-import {ChatsService} from '../chats/chats.service';
+import { environment } from '../../../../environments/environment';
+import { CompatClient, IMessage, Stomp } from '@stomp/stompjs';
+import { Message } from '../../model/Message.model';
+import { ChatsService } from '../chats/chats.service';
+import { User } from '../../model/User.model';
 
 
 @Injectable({
@@ -31,14 +32,30 @@ export class SocketService {
     private onConnected() {
         this.stompClient.subscribe('/message/chat-messages', (data: IMessage) => {
             // TODO bad logic, you might not be sitting in chat where message landed FIXIT
-            const currentMessages = this.chatsService.currentChatMessages;
-            currentMessages.push(JSON.parse(data.body));
-            this.chatsService.currentChatMessagesStream$.next(currentMessages);
+            const newMessage: Message = JSON.parse(data.body);
+            const messages = this.chatsService.chatsMessages[newMessage.chatId];
+            if (messages) {
+                messages.push(newMessage);
+                this.chatsService.currentChatMessagesStream$.next(messages);
+            }
         });
+        this.stompClient.subscribe('/message/new-participant', (participant) => {
+            console.log(participant);
+            const newChatParticipant: User = JSON.parse(participant.body);
+            this.chatsService.currentChat.participants.push(newChatParticipant);
+        })
     }
 
     private onError(error) {
         console.log(error);
+    }
+
+    addParticipant(userId: number) {
+        this.stompClient.send(
+            `/app/${ this.chatsService.currentChat.id }/participant`,
+            {},
+            JSON.stringify(userId)
+        )
     }
 
     sendMessage(message: Message) {
