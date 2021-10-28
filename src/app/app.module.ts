@@ -16,6 +16,7 @@ import { ChatModalComponent } from './main/component/chat-modal/chat-modal.compo
 import { CurrentChatComponent } from './main/component/current-chat/current-chat.component';
 import { ChatComponent } from './main/component/chat/chat.component';
 import { MessageFromDayPipe } from './main/pipe/message-from-day/message-from-day.pipe';
+import { AddParticipantComponent } from './main/component/add-participant/add-participant.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { MessageFromDayPipe } from './main/pipe/message-from-day/message-from-da
         ChatModalComponent,
         CurrentChatComponent,
         ChatComponent,
-        MessageFromDayPipe
+        MessageFromDayPipe,
+        AddParticipantComponent
     ],
     imports: [
         BrowserModule,

@@ -1,6 +1,6 @@
 <div class="current-chat"
      *ngIf="chatsService.currentChat; else noCurrentChatPlaceholder">
-    <div class="current-chat-title">
+    <div class="current-chat-title" (click)="openAddParticipantWindow()">
         <span class="current-chat-name">{{chatsService.currentChat.name}}</span>
         <span class="current-chat-dot"></span>
         <span class="current-chat-participants-quantity">Participants: {{chatsService.currentChat.participants.length}}</span>
